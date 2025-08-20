@@ -239,14 +239,14 @@ function handleInteraction() {
 
     let dGoIn = dist(mouseX, mouseY, goInButtonX, goInButtonY);
     if (dGoIn < goInButtonSize / 2) {
-        window.location.href = 'https://editor.p5js.org/vat0trv3/full/A4YiVnT2h';
+        window.location.href = 'PAGE3.html';
       fadingOut = true;
     }
 }
 
 
 // ===========================================
-// 5. FUNCIONES AUXILIARES DE DIBUJO
+// 5. FUNCIONES AUXILIARES DE DIBUJOpagina3.html
 // ===========================================
 function resetAudioParticles() {
     for (let p of buttonParticles) {
