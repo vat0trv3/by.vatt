@@ -9,23 +9,23 @@ let canvas;
 let level;
 function preload() {
   // Carga los sonidos
-  sounds[0] = loadSound('assets/2.wav', 
+  sounds[0] = loadSound('assets1/2.wav', 
     () => console.log("Audio 1 cargado"), 
     (err) => console.error("Error cargando audio 1:", err)
   );
-  sounds[1] = loadSound('assets/4.wav', 
+  sounds[1] = loadSound('assets1/4.wav', 
     () => console.log("Audio 2 cargado"), 
     (err) => console.error("Error cargando audio 2:", err)
   );
 
   // Carga el fondo según orientación
   if (windowWidth > windowHeight) {
-    bgImg = loadImage('assets/FONDO1.png',
+    bgImg = loadImage('assets1/FONDO1.png',
       () => console.log("Fondo horizontal cargado"),
       (err) => console.error("Error cargando fondo horizontal:", err)
     );
   } else {
-    bgImg = loadImage('assets/FONDO1_vertical.png',
+    bgImg = loadImage('assets1/FONDO1_vertical.png',
       () => console.log("Fondo vertical cargado"),
       (err) => console.error("Error cargando fondo vertical:", err)
     );
