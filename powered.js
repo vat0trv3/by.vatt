@@ -1,7 +1,4 @@
-// ===========================================
-// 1. VARIABLES GLOBALES
-// ===========================================
-let lastMouseX = -1;
+        let lastMouseX = -1;
 let lastMouseY = -1;
 let mySound;
 let myFont;
@@ -34,7 +31,10 @@ let goInButtonSize = 50;
 let goInParticles = [];
 const NUM_GO_IN_PARTICLES = 200;
 
+
+// ===========================================
 // 2. DEFINICIÓN DE CLASES
+// ===========================================
 class ButtonParticle {
     constructor() {
         this.reset();
@@ -120,8 +120,10 @@ class GoInButtonParticle {
     }
 }
 
-// 3. FUNCIONES PRINCIPALES DE P5.JS
 
+// ===========================================
+// 3. FUNCIONES PRINCIPALES DE P5.JS
+// ===========================================
 function preload() {
     mySound = loadSound('assets/audio/cancion.m4a');
     myFont = loadFont('assets/fuentes/neutro.ttf');
@@ -201,9 +203,9 @@ function draw() {
 
 
 
-// 
+// ============================================
 // 4. MANEJO DE INTERACCIONES
-// 
+// ============================================
 function mousePressed() {
     handleInteraction();
 }
