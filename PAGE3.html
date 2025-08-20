@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página de Proyectos</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    background-color: #0f1214;
+}
+
+/* contenedor principal */
+.thumbnails-container {
+    display: grid;
+    justify-content: center;
+    padding: 50px 0;
+    min-height: 100vh;
+    gap: 20px;
+}
+
+/* cada proyecto */
+.project-group {
+    width: 90vw;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* imagen del proyecto */
+.video-thumbnail {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+}
+
+/* botones */
+.project-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.project-buttons a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-weight: bold;
+    box-sizing: border-box;
+    transition: background-color 0.2s;
+}
+
+/* colores de botones */
+.soundcloud-button { background-color: #ff5500; }
+.soundcloud-button:hover { background-color: #e44d00; }
+
+.gemini-prompt-button { background-color: #3b82f6; }
+.gemini-prompt-button:hover { background-color: #2563eb; }
+
+.manual-animation-button { background-color: #6c4af5; }
+.manual-animation-button:hover { background-color: #5533d1; }
+
+.tiktok-general { background-color: #000000; }
+.tiktok-general:hover { background-color: #1a1a1a; }
+</style>
+</head>
+<body>
+
+<div class="thumbnails-container">
+    <!-- Proyecto 1 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/Fase02.png" alt="Fase02">
+        <div class="project-buttons">
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave/video/7511062640240626952" target="_blank">Ver en TikTok</a>
+            <a class="soundcloud-button" href="#" target="_blank">Escuchar en SoundCloud</a>
+        </div>
+    </div>
+
+    <!-- Proyecto 2 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/REYNA.png" alt="REYNA">
+        <div class="project-buttons">
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave/video/7498579341387762952" target="_blank">Ver en TikTok</a>
+            <a class="soundcloud-button" href="https://soundcloud.com/vatotrave/madrereynauvep" target="_blank">Escuchar en SoundCloud</a>
+        </div>
+    </div>
+
+    <!-- Proyecto 3 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/GOLDEN.png" alt="Golden Trash V2">
+        <div class="project-buttons">
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave/video/7506131086380928274" target="_blank">Ver en TikTok</a>
+            <a class="soundcloud-button" href="https://soundcloud.com/vatotrave/golden-trash-v2" target="_blank">Escuchar en SoundCloud</a>
+        </div>
+    </div>
+
+    <!-- Proyecto 4 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/KESIKENO.png" alt="Kesikeno">
+        <div class="project-buttons">
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave/video/7520211623043255559" target="_blank">Ver en TikTok</a>
+            <a class="soundcloud-button" href="https://soundcloud.com/vatotrave/kesikenofinal1" target="_blank">Escuchar en SoundCloud</a>
+        </div>
+    </div>
+
+    <!-- Proyecto 5 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/Genesis.png" alt="Genesis">
+        <div class="project-buttons">
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave/video/7491245454865255685" target="_blank">Ver en TikTok</a>
+            <a class="soundcloud-button" href="https://soundcloud.com/vatotrave/1g3nes1s" target="_blank">Escuchar en SoundCloud</a>
+        </div>
+    </div>
+
+    <!-- Proyecto 6 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/diseño original vato.jpg" alt="Fase 01 Gen">
+        <div class="project-buttons">
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave/video/7515465474763705608" target="_blank">Ver en TikTok</a>
+            <a class="soundcloud-button" href="https://soundcloud.com/vatotrave/fase-01-gen" target="_blank">Escuchar en SoundCloud</a>
+        </div>
+    </div>
+
+    <!-- Proyecto 7 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/Prompt1.png" alt="Prompt1">
+        <div class="project-buttons">
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave/video/7531999674241256712" target="_blank">Ver en TikTok</a>
+            <a class="gemini-prompt-button" href="https://www.tiktok.com/@vatotrave/video/7531999674241256712" target="_blank">Prompt de Gemini</a>
+        </div>
+    </div>
+
+    <!-- Proyecto 8 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/Prompt2.png" alt="Prompt2">
+        <div class="project-buttons">
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave/video/7535749266279566610" target="_blank">Ver en TikTok</a>
+            <a class="gemini-prompt-button" href="#" target="_blank">Prompt de Gemini</a>
+        </div>
+    </div>
+
+    <!-- Proyecto 9 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/Prompt3.png" alt="Prompt3">
+        <div class="project-buttons">
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave/video/7535034957505301768" target="_blank">Ver en TikTok</a>
+            <a class="gemini-prompt-button" href="#" target="_blank">Prompt de Gemini</a>
+        </div>
+    </div>
+
+    <!-- Proyecto 10 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/Prompt4.png" alt="Prompt4">
+        <div class="project-buttons">
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave/video/7531008358543920391" target="_blank">Ver en TikTok</a>
+            <a class="gemini-prompt-button" href="#" target="_blank">Prompt de Gemini</a>
+        </div>
+    </div>
+
+    <!-- Proyecto 11 -->
+    <div class="project-group">
+        <img class="video-thumbnail" src="assets/Anima.png" alt="Animación">
+        <div class="project-buttons">
+            <a class="manual-animation-button" href="#" target="_blank">Más</a>
+        </div>
+    </div>
+
+    <!-- Botones sociales -->
+    <div class="project-group">
+        <div class="project-buttons">
+            <a class="soundcloud-button" href="https://soundcloud.com/vatotrave" target="_blank">Mi SoundCloud</a>
+            <a class="tiktok-general" href="https://www.tiktok.com/@vatotrave" target="_blank">Mi TikTok</a>
+        </div>
+    </div>
+</div> <!-- fin thumbnails-container -->
+
+<!-- Scripts p5.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
+<script src="PAGE3.js"></script>
+
+</body>
+</html>
