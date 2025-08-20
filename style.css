@@ -1,0 +1,22 @@
+html, body {
+ margin: 0;
+    padding: 0;
+    overflow-y: scroll; /* habilita scroll vertical */
+  }
+  canvas {
+    display: block;
+  }
+canvas {
+  display: block;
+}
+.link-btn {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  padding: 12px 20px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  z-index: 2; /* encima del canvas */
+}
