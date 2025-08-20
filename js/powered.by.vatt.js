@@ -412,9 +412,10 @@ function drawTextElements() {
     pop();
     textFont('Verdana');
     textSize(textSizeCorner);
-    let alphaCorner = map(sin(frameCount * 0.15), -1, 1, 80, 150);
-    fill(255, 255, 255, alphaCorner);
-    text("INFINITTE-POSSIBLE", width * 0.40, height * 0.95);
+   let alphaCorner = map(sin(frameCount * 0.15), -1, 1, 80, 150);
+fill(255, 255, 255, alphaCorner);
+textAlign(CENTER, CENTER); // Esta línea centra el texto que sigue, tanto horizontal como verticalmente.
+text("INFINITE-POSSIBLE", width * 0.50, height * 0.95);
 }
 
 function drawBackgroundWaves() {
