@@ -8,7 +8,7 @@ AQUI, donde la música, visuales  y la tecnología se fusionan.
  Este proyecto presenta una galería interactiva de experiencias audiovisuales, demos sonoras y enlaces sociales con diseño responsivo y vibrante.
 
 ## ✨ Características
-
+https://vat0trv3.github.io/by.vatt/
 - Portafolio interactivo con enfoque artístico.
 Produccion de video con diferentes herramientas .
 - Enlace directo a redes sociales (Instagram, YouTube, TikTok, Behance).
