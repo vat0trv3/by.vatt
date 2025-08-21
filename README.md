@@ -38,4 +38,30 @@ Visuales generativos en tiempo real
 Clips de demos sonoras
 
 Experiencias interactivas
+---------------------------------
 
+
+
+
+#VATOTRAVE
+#POWEREDbyVATT
+#AudioVisual
+#ArteGenerativo
+#MusicaInteractiva
+#ProduccionDeVideo
+#Visuales
+#Experimentacion
+#CreatividadDigital
+#Innovacion
+#PortfolioInteractivo
+#RedesSociales
+#VJ
+#PerformanceDigital
+#Multimedia
+#Animacion
+#ExperienciaAudiovisual
+#ConstanteAprendizaje
+#ExploracionCreativa
+#HaciaLoDesconocido
+#ArteYCodigo
+#FusionMusicaVisual
