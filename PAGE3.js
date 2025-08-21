@@ -1,34 +1,22 @@
 let particles = [];
-let maxParticles = 200;
-let trailLength = 55;
+let maxParticles = 180; // doble que antes
+let trailLength = 27;
 let fft, amplitude;
 let sounds = [];
 let currentSound = 0;
 let bgImg;
-let canvas; 
-let level;
-function preload() {
-  // Carga los sonidos
-  sounds[0] = loadSound('assets1/2.wav', 
-    () => console.log("Audio 1 cargado"), 
-    (err) => console.error("Error cargando audio 1:", err)
-  );
-  sounds[1] = loadSound('assets1/4.wav', 
-    () => console.log("Audio 2 cargado"), 
-    (err) => console.error("Error cargando audio 2:", err)
-  );
 
-  // Carga el fondo según orientación
+let turquoiseParticles = [];
+let turquoiseCount = 100;
+
+function preload() {
+  sounds[0] = loadSound('assets1/2.wav');
+  sounds[1] = loadSound('assets1/4.wav');
+
   if (windowWidth > windowHeight) {
-    bgImg = loadImage('assets1/FONDO1.png',
-      () => console.log("Fondo horizontal cargado"),
-      (err) => console.error("Error cargando fondo horizontal:", err)
-    );
+    bgImg = loadImage('assets1/FONDO1.png');
   } else {
-    bgImg = loadImage('assets1/FONDO1_vertical.png',
-      () => console.log("Fondo vertical cargado"),
-      (err) => console.error("Error cargando fondo vertical:", err)
-    );
+    bgImg = loadImage('assets1/FONDO1_vertical.png');
   }
 }
 
@@ -38,25 +26,27 @@ function setup() {
   canvas.style('z-index', '-1');
   canvas.style('position', 'fixed');
 
-  // Inicializa audio en navegadores modernos
   userStartAudio();
 
   fft = new p5.FFT(0.9, 1024);
   amplitude = new p5.Amplitude();
 
-  playNextSound();
-
   for (let i = 0; i < maxParticles; i++) {
     particles.push(new Particle());
   }
 
-  strokeWeight(0.4);
+  // Inicializa partículas turquesa
+  for (let i = 0; i < turquoiseCount; i++) {
+    turquoiseParticles.push(new TurquoiseParticle());
+  }
+
+  playNextSound();
 }
 
 function draw() {
-  background(0); // negro de base
+  background(0);
 
-  // Calcula proporciones
+  // Dibuja fondo centrado
   let imgAspect = bgImg.width / bgImg.height;
   let canvasAspect = width / height;
   let drawWidth, drawHeight;
@@ -69,26 +59,26 @@ function draw() {
     drawHeight = drawWidth / imgAspect;
   }
 
-  // Nivel de audio para opacidad dinámica
   let level = amplitude.getLevel();
-  tint(150, map(level, 0, 0.3, 150, 150)); // entre 150 y 255
-
-  // Dibuja imagen centrada
+  tint(150, map(level, 0, 0.1, 150, 255));
   imageMode(CENTER);
   image(bgImg, width / 2, height / 2, drawWidth, drawHeight);
-  noTint(); // importante: partículas no se ven afectadas
+  noTint();
 
-  // Analiza audio para partículas
+  // --- Capa turquesa detrás ---
+  for (let tp of turquoiseParticles) {
+    tp.update();
+    tp.show();
+  }
+
   let spectrum = fft.analyze();
-  let factor = map(level, 0, 0.3, 0.5, 3);
+  let factor = map(level, 0, 0.3, 1, 3);
 
   for (let p of particles) {
     p.update(factor);
     p.show(spectrum);
   }
 }
-
-
 
 function playNextSound() {
   sounds[currentSound].play();
@@ -98,13 +88,15 @@ function playNextSound() {
   });
 }
 
-// Clase Particle
+// ====================
+// Clase Particle (principal)
+// ====================
 class Particle {
   constructor() {
     this.pos = createVector(random(width), random(height));
-    this.vel = p5.Vector.random2D().mult(random(0.3, 2));
+    this.vel = p5.Vector.random3D().mult(random(0.1, 3));
     this.history = [];
-    this.lifetime = random(250, 600);
+    this.lifetime = random(100, 900);
     this.age = 0;
   }
 
@@ -112,66 +104,98 @@ class Particle {
     this.pos.add(p5.Vector.mult(this.vel, factor));
     this.age++;
 
-    // Rebote en bordes
     if (this.pos.x < 0 || this.pos.x > width) this.vel.x *= -1;
     if (this.pos.y < 0 || this.pos.y > height) this.vel.y *= -1;
 
-    // Guardar historial para trails
     this.history.push(this.pos.copy());
     if (this.history.length > trailLength) this.history.shift();
 
-    // Resetear si muere
     if (this.age > this.lifetime) {
       this.pos = createVector(random(width), random(height));
-      this.vel = p5.Vector.random2D().mult(random(0.5, 2));
+      this.vel = p5.Vector.random3D().mult(random(0.4, 5));
       this.history = [];
       this.age = 0;
     }
   }
 
-  show(spectrum) {
-    // energías (pueden seguir afectando grosor, velocidad, etc.)
-  let bass = fft.getEnergy("bass");
-let mid = fft.getEnergy("mid");
-let high = fft.getEnergy("treble"); // agudos
+  show() {
+    let c = bgImg.get(
+      int(this.pos.x * bgImg.width / width),
+      int(this.pos.y * bgImg.height / height)
+    );
+    let brightnessValue = (red(c) + green(c) + blue(c)) / 3;
+    let alphaVal = map(amplitude.getLevel(), 0, 0.3, 80, 200);
+    let lineColor = (brightnessValue < 128) ? color(255, alphaVal) : color(0, alphaVal);
 
-let gray = map(mid, 0, 255, 100, 255);    // gris para líneas
-let alpha = map(bass, 0, 255, 50, 180);   // opacidad
-let blue = map(high, 0, 255, 50, 255);    // azul para un toque treble
+    // Líneas entre partículas
+    for (let other of particles) {
+      if (other !== this) {
+        let d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+        if (d < 140) {
+          stroke(lineColor);
+          strokeWeight(0.5);
+          line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+        }
+      }
+    }
 
-// Líneas entre partículas
-for (let other of particles) {
-  if (other !== this) {
-    let d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
-    if (d < 140) {
-      stroke(gray, alpha, blue); // mezcla gris y azul con opacidad
-      line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+    // Trails
+    for (let i = 1; i < this.history.length; i++) {
+      let p1 = this.history[i - 1];
+      let p2 = this.history[i];
 
-      // destellos/minitrazos reactivos
-      if (random(1) < 0.08) {
-        let steps = int(random(2, 5));
-        for (let i = 0; i < steps; i++) {
-          let t = random(0.2, 0.8);
-          let midX = lerp(this.pos.x, other.pos.x, t);
-          let midY = lerp(this.pos.y, other.pos.y, t);
-          let offsetX = random(-3, 3);
-          let offsetY = random(-3, 3);
-          stroke(255, map(high,0,255,100,255)); // brillo de destello según treble
-          line(midX, midY, midX + offsetX, midY + offsetY);
+      let bass = fft.getEnergy("bass");
+      let w = map(bass, 0, 255, 0.25, 1.5);
+
+      let high = fft.getEnergy("treble");
+      let offsetX = map(high, 0, 255, -3, 3);
+      let offsetY = map(high, 0, 255, -3, 3);
+
+      stroke(lineColor);
+      strokeWeight(w);
+      line(p1.x, p1.y, p2.x + offsetX, p2.y + offsetY);
+    }
+  }
+}
+
+// ====================
+// Clase TurquoiseParticle
+// ====================
+class TurquoiseParticle {
+  constructor() {
+    this.pos = createVector(random(width), random(height));
+    this.vel = p5.Vector.random3D().mult(3.5);
+  }
+
+  update() {
+    let angle = noise(this.pos.x * 0.02, this.pos.y * 0.02, frameCount * 0.02) * TWO_PI * 2;
+    this.vel = p5.Vector.fromAngle(angle).mult(0.5);
+    this.pos.add(this.vel);
+
+    if (this.pos.x < 0) this.pos.x = width;
+    if (this.pos.x > width) this.pos.x = 2;
+    if (this.pos.y < 0) this.pos.y = height;
+    if (this.pos.y > height) this.pos.y = 2;
+  }
+
+  show() {
+    noStroke();
+    fill(64, 224, 208, 120);
+    ellipse(this.pos.x, this.pos.y, 4, 4);
+
+    for (let other of turquoiseParticles) {
+      if (other !== this) {
+        let d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+        if (d < 100) {
+          stroke(64, 224, 208, 255);
+          strokeWeight(0.3);
+          line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
         }
       }
     }
   }
 }
-    // Trails de la partícula
-    for (let i = 1; i < this.history.length; i++) {
-      let p1 = this.history[i - 1];
-      let p2 = this.history[i];
-      stroke(gray, map(i, 0, trailLength, 0, 180));
-      line(p1.x, p1.y, p2.x, p2.y);
-    }
-  }
-}
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
